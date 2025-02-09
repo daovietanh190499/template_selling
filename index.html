@@ -17,6 +17,10 @@
         <input type="text" id="search" placeholder="Gõ tên mẫu..." class="p-2 border rounded w-1/2">
         <button id="search-btn" class="bg-red-500 text-white px-4 py-2 rounded ml-2">Tìm kiếm</button>
     </div>
+    <div class="flex items-center justify-center my-4">
+        <input type="text" id="id-search" placeholder="Gõ id mẫu..." class="p-2 border rounded w-1/2">
+        <button id="id-search-btn" class="bg-red-500 text-white px-4 py-2 rounded ml-2">Tìm kiếm</button>
+    </div>
     <div class="flex justify-center gap-2 mb-4">
         <select id="category" class="p-2 border rounded">
             <option value="">Danh mục</option>
@@ -51,12 +55,14 @@
         async function fetchProducts() {
             document.getElementById('loading').classList.remove('hidden');
             const searchValue = document.getElementById('search').value;
+            const searchIDValue = document.getElementById('id-search').value;
             const category = document.getElementById('category').value;
             const color = document.getElementById('color').value;
             const rating = document.getElementById('rating').value;
             const interfaceType = document.getElementById('interface').value;
 
             const queryParams = new URLSearchParams({
+                "_id": searchIDValue,
                 "_name": searchValue,
                 "_category": category,
                 "_main_color": color,
@@ -94,6 +100,7 @@
             document.getElementById('page').innerText = `Page ${page}`;
         }
 
+        document.getElementById('id-search-btn').addEventListener('click', fetchProducts);
         document.getElementById('search-btn').addEventListener('click', fetchProducts);
         document.getElementById('category').addEventListener('change', fetchProducts);
         document.getElementById('color').addEventListener('change', fetchProducts);
